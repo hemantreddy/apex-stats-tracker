@@ -1,0 +1,10 @@
+img {
+  width: 300px;
+}
+
+@media (max-width: 700) {
+  img {
+    display: block;
+    margin: auto;
+  }
+}
