@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const compression = require('compression');
 const path = require('path');
 
 // Load env
@@ -13,7 +14,8 @@ app.use(cors());
 // Dev Logging
 
 if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
+  app.use(morgan('common'));
+  app.use(compression());
 }
 
 // Profile routes
@@ -24,9 +26,9 @@ app.use('/api/v1/profile', require('./routes/profile'));
 
 if (process.env.NODE_ENV === 'production') {
   // set static folder
-  app.use(express.static('client/build'));
+  app.use(express.static(path.resolve(__dirname, 'build')));
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
   });
 }
 
