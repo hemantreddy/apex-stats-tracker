@@ -20,8 +20,7 @@ UNSAFE_componentWillMount() {
 
 componentDidMount() {
     document.body.className = "body-bg-no-image";
-    try {
-        const {platform, gamertag} = this.props.match.params
+    const {platform, gamertag} = this.props.match.params
         console.log(platform, gamertag)
         axios.get(`http://localhost:5000/api/v1/profile/${platform}/${gamertag}`)
             .then(res => {
@@ -29,14 +28,15 @@ componentDidMount() {
                    loading: false,
                    profileData: res.data.data
                })
-            }).then(() => console.log(this.state.profileData));
-    } catch(error) {
+            })
+            .then(() => console.log(this.state.profileData))
+            .catch(error => {
             this.setState({
                 loading: false,
                 error,
-            }) 
-            console.log('error')
-        }
+                }) 
+            })
+
     }
     render() {
         const {loading, profileData, error} = this.state;
@@ -105,6 +105,7 @@ componentDidMount() {
                         </ul>
                     </div>
                 </div>
+                <Link to="/">Go Back</Link>
             </div>
         )
     }
