@@ -14,8 +14,7 @@ app.use(cors());
 // Dev Logging
 
 if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('common'));
-  app.use(compression());
+  app.use(morgan('dev'));
 }
 
 // Profile routes
@@ -25,6 +24,8 @@ app.use('/api/v1/profile', require('./routes/profile'));
 // Serve static assets if in production
 
 if (process.env.NODE_ENV === 'production') {
+  app.use(compression());
+  app.use(morgan('common'));
   // set static folder
   app.use(express.static(path.resolve(__dirname, 'build')));
   app.get('*', (req, res) => {
