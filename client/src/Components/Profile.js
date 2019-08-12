@@ -22,7 +22,7 @@ componentDidMount() {
     document.body.className = "body-bg-no-image";
     const {platform, gamertag} = this.props.match.params
         console.log(platform, gamertag)
-        axios.get(`http://localhost:5000/api/v1/profile/${platform}/${gamertag}`)
+        axios.get(`/api/v1/profile/${platform}/${gamertag}`)
             .then(res => {
                this.setState({
                    loading: false,
