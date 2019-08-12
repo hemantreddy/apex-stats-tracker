@@ -27,7 +27,7 @@ componentDidMount() {
                this.setState({
                    loading: false,
                    profileData: res.data.data
-               }).then(()=>console.log(this.state.profileData))
+               })
             })
             .then(() => console.log(this.state.profileData))
             .catch(error => {
