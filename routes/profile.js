@@ -3,18 +3,18 @@ const fetch = require('node-fetch');
 
 const router = express.Router();
 
+const apiKey = require('../config/keys').TRACKER_API_KEY;
+const apiUrl = require('../config/keys').TRACKER_API_URL;
+
 router.get('/:platform/:gamertag', async (req, res, next) => {
   try {
     const headers = {
-      'TRN-Api-Key': process.env.TRACKER_API_KEY,
+      'TRN-Api-Key': apiKey,
     };
     const { platform, gamertag } = req.params;
-    const response = await fetch(
-      `${process.env.TRACKER_API_URL}/profile/${platform}/${gamertag}`,
-      {
-        headers,
-      }
-    );
+    const response = await fetch(`${apiUrl}/profile/${platform}/${gamertag}`, {
+      headers,
+    });
     const data = await response.json();
     if (data.errors && data.errors.length > 0) {
       res.status(404).json({

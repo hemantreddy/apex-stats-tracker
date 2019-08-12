@@ -1,11 +1,11 @@
 const express = require('express');
 const morgan = require('morgan');
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv');
 const cors = require('cors');
 const path = require('path');
 
 // Load env
-dotenv.config({ path: './config.env' });
+// dotenv.config({ path: './config.env' });
 
 const app = express();
 app.use(cors());
@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`server running in ${process.env.NODE_ENV} mode on port ${port}`);
